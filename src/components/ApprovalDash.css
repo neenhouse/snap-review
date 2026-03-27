@@ -1,0 +1,253 @@
+.approval-dash {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.dash-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dash-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.dash-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dash-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.dash-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Filters */
+.dash-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.dash-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.dash-filter-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+.dash-filter-btn.active {
+  background: var(--magenta-dim);
+  border-color: var(--magenta-border);
+  color: var(--magenta);
+}
+
+.filter-count {
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.dash-filter-btn.active .filter-count {
+  background: rgba(255, 60, 172, 0.25);
+}
+
+/* Table */
+.dash-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+}
+
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dash-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-tertiary);
+}
+
+.dash-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.dash-table tr:last-child td {
+  border-bottom: none;
+}
+.dash-table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+/* Review cell */
+.dash-review-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-thumb {
+  flex-shrink: 0;
+}
+
+.dash-review-title {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dash-review-date {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Assignee */
+.dash-assignee {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* Badge */
+.dash-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.dash-priority {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.dash-ann-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  background: var(--magenta-dim);
+  color: var(--magenta);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.dash-due {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Actions */
+.dash-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.dash-action-btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid;
+  transition: opacity 0.15s;
+}
+.dash-action-btn:hover {
+  opacity: 0.8;
+}
+
+.dash-action-btn.approve {
+  background: var(--green-dim);
+  color: var(--green);
+  border-color: var(--green-border);
+}
+
+.dash-action-btn.reject {
+  background: var(--red-dim);
+  color: var(--red);
+  border-color: var(--red-border);
+}
+
+.dash-empty {
+  text-align: center;
+  padding: 48px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .approval-dash {
+    padding: 16px;
+  }
+  .dash-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

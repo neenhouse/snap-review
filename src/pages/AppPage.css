@@ -1,0 +1,145 @@
+.app-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Nav */
+.app-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.app-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.app-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+.app-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: var(--magenta);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.app-brand-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.app-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.app-tab {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+.app-tab:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+.app-tab.active {
+  background: var(--magenta-dim);
+  color: var(--magenta);
+}
+
+/* Content */
+.app-content {
+  flex: 1;
+  overflow: auto;
+}
+
+/* Compare layout */
+.compare-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  height: calc(100vh - 56px);
+}
+
+.compare-main {
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.compare-sidebar {
+  border-left: 1px solid var(--border);
+  background: var(--bg-secondary);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.compare-workspace {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.compare-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* Small buttons */
+.btn-sm {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.btn-secondary-sm {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.btn-secondary-sm:hover {
+  background: var(--bg-hover);
+}
+
+@media (max-width: 900px) {
+  .compare-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .compare-sidebar {
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+}

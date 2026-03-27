@@ -1,0 +1,175 @@
+.pixel-diff {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Controls */
+.diff-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.diff-modes {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.diff-mode-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+.diff-mode-btn:hover {
+  color: var(--text-primary);
+}
+.diff-mode-btn.active {
+  background: var(--magenta);
+  color: #fff;
+}
+
+.diff-sensitivity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.diff-sensitivity label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.diff-sensitivity input[type='range'] {
+  width: 100px;
+  accent-color: var(--magenta);
+}
+
+.diff-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.diff-stats .stat strong {
+  color: var(--magenta);
+}
+
+/* Viewport */
+.diff-viewport {
+  flex: 1;
+  min-height: 300px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: auto;
+  padding: 16px;
+}
+
+.diff-side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  height: 100%;
+}
+
+.diff-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.diff-panel-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.diff-panel canvas {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* Overlay mode */
+.diff-overlay-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.diff-overlay-stack {
+  position: relative;
+  display: inline-block;
+}
+.diff-overlay-stack canvas {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+.overlay-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slider-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+.slider-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.overlay-slider {
+  flex: 1;
+  accent-color: var(--magenta);
+}
+
+/* Diff only */
+.diff-only-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.diff-only-container canvas {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* Annotation overlay */
+.annotation-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.diff-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}

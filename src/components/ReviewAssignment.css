@@ -1,0 +1,97 @@
+.review-assignment {
+  padding: 20px;
+}
+
+.ra-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.ra-field {
+  margin-bottom: 14px;
+}
+
+.ra-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.ra-select,
+.ra-date {
+  width: 100%;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.ra-select:focus,
+.ra-date:focus {
+  border-color: var(--magenta-border);
+}
+
+/* Priority buttons */
+.ra-priority-group {
+  display: flex;
+  gap: 6px;
+}
+
+.ra-priority-btn {
+  flex: 1;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 0;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.ra-priority-low.active {
+  background: rgba(107, 114, 128, 0.15);
+  border-color: rgba(107, 114, 128, 0.5);
+  color: var(--text-secondary);
+}
+.ra-priority-medium.active {
+  background: var(--yellow-dim);
+  border-color: var(--yellow-border);
+  color: var(--yellow);
+}
+.ra-priority-high.active {
+  background: var(--red-dim);
+  border-color: var(--red-border);
+  color: var(--red);
+}
+
+/* Date input color scheme fix for dark mode */
+.ra-date::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Save button */
+.ra-save {
+  width: 100%;
+  background: var(--magenta);
+  color: #fff;
+  border: none;
+  padding: 10px 0;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  transition: opacity 0.15s;
+  margin-top: 4px;
+}
+.ra-save:hover {
+  opacity: 0.85;
+}

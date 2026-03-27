@@ -1,0 +1,166 @@
+.annotation-tools {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.annotation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.annotation-header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.annotation-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--magenta-dim);
+  color: var(--magenta);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.annotation-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.annotation-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.annotation-item {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.annotation-item:hover {
+  border-color: var(--magenta-border);
+}
+.annotation-item.pin-flash {
+  border-color: var(--magenta);
+  box-shadow: 0 0 12px var(--magenta-dim);
+}
+
+.annotation-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.annotation-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--magenta);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.annotation-coords {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+
+.annotation-remove {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+.annotation-remove:hover {
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+.annotation-comment {
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: text;
+}
+
+.annotation-placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Edit */
+.annotation-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.annotation-edit textarea {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  color: var(--text-primary);
+  padding: 6px 8px;
+  font-size: 13px;
+  resize: vertical;
+}
+.annotation-edit textarea:focus {
+  outline: none;
+  border-color: var(--magenta-border);
+}
+
+.annotation-edit-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-sm-save {
+  background: var(--magenta);
+  color: #fff;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.btn-sm-save:hover {
+  opacity: 0.85;
+}
+
+.btn-sm-cancel {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.btn-sm-cancel:hover {
+  background: var(--bg-hover);
+}
