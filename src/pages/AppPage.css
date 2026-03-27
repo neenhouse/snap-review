@@ -1,25 +1,32 @@
+/* ===================================================================
+   App Page — SnapReview
+   =================================================================== */
+
 .app-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: var(--bg-primary);
 }
 
-/* Nav */
+/* ── Nav ── */
 .app-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  height: 56px;
+  padding: 0 20px;
+  height: 52px;
   border-bottom: 1px solid var(--border);
-  background: var(--bg-secondary);
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   flex-shrink: 0;
 }
 
 .app-nav-left {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .app-nav-brand {
@@ -30,67 +37,90 @@
   border: none;
   padding: 0;
   color: inherit;
+  cursor: pointer;
 }
 
 .app-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: var(--radius-sm);
-  background: var(--magenta);
-  color: #fff;
-  font-weight: 700;
-  font-size: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  background: var(--magenta-dim);
+  border: 1px solid var(--magenta-border);
 }
 
 .app-brand-text {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.3px;
 }
 
 .app-tabs {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 .app-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: none;
   border: none;
-  color: var(--text-secondary);
-  padding: 8px 16px;
+  color: var(--text-muted);
+  padding: 6px 14px;
   border-radius: var(--radius-sm);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  transition: background 0.15s, color 0.15s;
+  transition: background var(--duration-fast), color var(--duration-fast);
 }
 .app-tab:hover {
   background: var(--bg-tertiary);
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 .app-tab.active {
   background: var(--magenta-dim);
   color: var(--magenta);
 }
 
-/* Content */
+.app-nav-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  transition: background var(--duration-fast), border-color var(--duration-fast),
+    color var(--duration-fast);
+}
+.app-nav-action:hover {
+  background: var(--bg-hover);
+  border-color: var(--magenta-border);
+  color: var(--text-primary);
+}
+
+/* ── Content ── */
 .app-content {
   flex: 1;
   overflow: auto;
 }
 
-/* Compare layout */
+/* ── Compare layout ── */
 .compare-layout {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  height: calc(100vh - 56px);
+  grid-template-columns: 1fr 340px;
+  height: calc(100vh - 52px);
 }
 
 .compare-main {
   overflow: auto;
-  padding: 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -103,36 +133,33 @@
   flex-direction: column;
 }
 
+.compare-sidebar.sidebar-empty {
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 40px;
+}
+.sidebar-placeholder p {
+  font-size: 13px;
+  max-width: 200px;
+  line-height: 1.5;
+}
+
 .compare-workspace {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.compare-toolbar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-/* Small buttons */
-.btn-sm {
-  font-size: 13px;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-}
-
-.btn-secondary-sm {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-  transition: background 0.15s;
-}
-.btn-secondary-sm:hover {
-  background: var(--bg-hover);
-}
-
+/* ── Responsive ── */
 @media (max-width: 900px) {
   .compare-layout {
     grid-template-columns: 1fr;
@@ -141,5 +168,8 @@
   .compare-sidebar {
     border-left: none;
     border-top: 1px solid var(--border);
+  }
+  .compare-sidebar.sidebar-empty {
+    display: none;
   }
 }

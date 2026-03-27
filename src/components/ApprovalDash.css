@@ -1,55 +1,78 @@
+/* ===================================================================
+   Approval Dashboard — SnapReview
+   =================================================================== */
+
 .approval-dash {
-  padding: 32px;
+  padding: 28px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Header */
+/* ── Header ── */
 .dash-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 24px;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
+}
+
+.dash-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .dash-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: var(--text-primary);
   margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.dash-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 .dash-stats {
   display: flex;
-  gap: 24px;
+  gap: 20px;
 }
 
 .dash-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 8px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  min-width: 72px;
 }
 
 .dash-stat-value {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--text-primary);
+  font-family: var(--mono);
 }
 
 .dash-stat-label {
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 10px;
+  color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
-/* Filters */
+/* ── Filters ── */
 .dash-filters {
   display: flex;
-  gap: 6px;
-  margin-bottom: 20px;
+  gap: 4px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 
@@ -59,16 +82,17 @@
   gap: 6px;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 7px 14px;
+  color: var(--text-muted);
+  padding: 6px 14px;
   border-radius: var(--radius-sm);
-  font-size: 13px;
-  font-weight: 500;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background var(--duration-fast), border-color var(--duration-fast),
+    color var(--duration-fast);
 }
 .dash-filter-btn:hover {
   background: var(--bg-tertiary);
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 .dash-filter-btn.active {
   background: var(--magenta-dim);
@@ -80,14 +104,15 @@
   background: var(--bg-tertiary);
   border-radius: 10px;
   padding: 1px 7px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
+  font-family: var(--mono);
 }
 .dash-filter-btn.active .filter-count {
-  background: rgba(255, 60, 172, 0.25);
+  background: rgba(236, 72, 153, 0.2);
 }
 
-/* Table */
+/* ── Table ── */
 .dash-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--border);
@@ -98,38 +123,42 @@
 .dash-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .dash-table th {
   text-align: left;
-  padding: 12px 16px;
-  font-size: 11px;
+  padding: 10px 14px;
+  font-size: 10px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-bottom: 1px solid var(--border);
-  background: var(--bg-tertiary);
+  background: var(--bg-surface);
+  white-space: nowrap;
 }
 
 .dash-table td {
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
 .dash-table tr:last-child td {
   border-bottom: none;
 }
+.dash-table tbody tr {
+  transition: background var(--duration-fast);
+}
 .dash-table tbody tr:hover {
-  background: var(--bg-hover);
+  background: rgba(236, 72, 153, 0.02);
 }
 
-/* Review cell */
+/* ── Review cell ── */
 .dash-review-cell {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .dash-thumb {
@@ -140,15 +169,17 @@
   display: block;
   font-weight: 600;
   color: var(--text-primary);
+  font-size: 13px;
 }
 
 .dash-review-date {
   display: block;
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--mono);
 }
 
-/* Assignee */
+/* ── Assignee ── */
 .dash-assignee {
   display: flex;
   align-items: center;
@@ -159,31 +190,41 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: var(--bg-tertiary);
   border: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   color: var(--text-secondary);
   flex-shrink: 0;
 }
 
-/* Badge */
+.dash-assignee-name {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ── Badge ── */
 .dash-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
   border: 1px solid;
   white-space: nowrap;
 }
 
 .dash-priority {
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 700;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .dash-ann-count {
@@ -195,32 +236,40 @@
   background: var(--magenta-dim);
   color: var(--magenta);
   border-radius: 12px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   padding: 0 6px;
+  font-family: var(--mono);
 }
 
 .dash-due {
-  font-size: 13px;
-  color: var(--text-secondary);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  white-space: nowrap;
 }
 
-/* Actions */
+/* ── Actions ── */
 .dash-actions {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
 .dash-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: var(--radius-xs);
+  font-size: 11px;
+  font-weight: 700;
   border: 1px solid;
-  transition: opacity 0.15s;
+  transition: opacity var(--duration-fast), background var(--duration-fast),
+    box-shadow var(--duration-fast), transform var(--duration-fast);
+  white-space: nowrap;
 }
 .dash-action-btn:hover {
-  opacity: 0.8;
+  transform: translateY(-1px);
 }
 
 .dash-action-btn.approve {
@@ -228,20 +277,51 @@
   color: var(--green);
   border-color: var(--green-border);
 }
+.dash-action-btn.approve:hover {
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+}
+.dash-action-btn.approve.confirming {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
+  animation: confirm-pulse 0.4s ease-out;
+}
 
 .dash-action-btn.reject {
   background: var(--red-dim);
   color: var(--red);
   border-color: var(--red-border);
 }
-
-.dash-empty {
-  text-align: center;
-  padding: 48px;
-  color: var(--text-muted);
-  font-size: 15px;
+.dash-action-btn.reject:hover {
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+.dash-action-btn.reject.confirming {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+  box-shadow: 0 2px 12px rgba(239, 68, 68, 0.3);
+  animation: confirm-pulse 0.4s ease-out;
 }
 
+@keyframes confirm-pulse {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* ── Empty state ── */
+.dash-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .approval-dash {
     padding: 16px;
@@ -249,5 +329,13 @@
   .dash-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .dash-stats {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dash-stat {
+    min-width: 60px;
+    padding: 6px 10px;
   }
 }

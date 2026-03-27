@@ -13,6 +13,10 @@ type FilterStatus = 'all' | ReviewStatus;
 export default function ApprovalDash() {
   const [reviews, setReviews] = useState<Review[]>(mockReviews);
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all');
+  const [confirmingAction, setConfirmingAction] = useState<{
+    id: string;
+    action: 'approved' | 'rejected';
+  } | null>(null);
 
   const filtered =
     filterStatus === 'all'
@@ -35,42 +39,71 @@ export default function ApprovalDash() {
           : r,
       ),
     );
+    setConfirmingAction(null);
+  };
+
+  const handleAction = (id: string, action: 'approved' | 'rejected') => {
+    if (confirmingAction?.id === id && confirmingAction?.action === action) {
+      updateStatus(id, action);
+    } else {
+      setConfirmingAction({ id, action });
+      setTimeout(() => {
+        setConfirmingAction((current) =>
+          current?.id === id && current?.action === action ? null : current,
+        );
+      }, 3000);
+    }
+  };
+
+  const statusIcons: Record<ReviewStatus, React.ReactNode> = {
+    pending: (
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+    'in-review': (
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+      </svg>
+    ),
+    approved: (
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    ),
+    rejected: (
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    ),
   };
 
   return (
     <div className="approval-dash" data-testid="approval-dash">
-      {/* Summary stats */}
+      {/* Header with stats */}
       <div className="dash-header">
-        <h2 className="dash-title">Approval Dashboard</h2>
+        <div className="dash-header-left">
+          <h2 className="dash-title">Approval Dashboard</h2>
+          <p className="dash-subtitle">Track review status across your team</p>
+        </div>
         <div className="dash-stats">
-          <div className="dash-stat">
-            <span className="dash-stat-value">{counts.all}</span>
-            <span className="dash-stat-label">Total</span>
-          </div>
-          <div className="dash-stat">
-            <span className="dash-stat-value" style={{ color: 'var(--yellow)' }}>
-              {counts.pending}
-            </span>
-            <span className="dash-stat-label">Pending</span>
-          </div>
-          <div className="dash-stat">
-            <span className="dash-stat-value" style={{ color: 'var(--blue)' }}>
-              {counts['in-review']}
-            </span>
-            <span className="dash-stat-label">In Review</span>
-          </div>
-          <div className="dash-stat">
-            <span className="dash-stat-value" style={{ color: 'var(--green)' }}>
-              {counts.approved}
-            </span>
-            <span className="dash-stat-label">Approved</span>
-          </div>
-          <div className="dash-stat">
-            <span className="dash-stat-value" style={{ color: 'var(--red)' }}>
-              {counts.rejected}
-            </span>
-            <span className="dash-stat-label">Rejected</span>
-          </div>
+          {[
+            { key: 'all', label: 'Total', color: 'var(--text-primary)' },
+            { key: 'pending', label: 'Pending', color: 'var(--yellow)' },
+            { key: 'in-review', label: 'In Review', color: 'var(--blue)' },
+            { key: 'approved', label: 'Approved', color: 'var(--green)' },
+            { key: 'rejected', label: 'Rejected', color: 'var(--red)' },
+          ].map((s) => (
+            <div key={s.key} className="dash-stat">
+              <span className="dash-stat-value" style={{ color: s.color }}>
+                {counts[s.key as keyof typeof counts]}
+              </span>
+              <span className="dash-stat-label">{s.label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -118,18 +151,13 @@ export default function ApprovalDash() {
                         <rect
                           width="32"
                           height="32"
-                          rx="4"
+                          rx="6"
                           fill="var(--bg-tertiary)"
                         />
-                        <text
-                          x="16"
-                          y="20"
-                          textAnchor="middle"
-                          fill="var(--text-muted)"
-                          fontSize="10"
-                        >
-                          IMG
-                        </text>
+                        <rect x="6" y="6" width="8" height="8" rx="1" fill="var(--border-light)" />
+                        <rect x="18" y="6" width="8" height="8" rx="1" fill="var(--border-light)" />
+                        <rect x="6" y="18" width="8" height="8" rx="1" fill="var(--border-light)" />
+                        <rect x="18" y="18" width="8" height="8" rx="1" fill="var(--magenta-border)" />
                       </svg>
                     </div>
                     <div>
@@ -145,18 +173,19 @@ export default function ApprovalDash() {
                     <span className="dash-avatar">
                       {review.assignee.avatar}
                     </span>
-                    <span>{review.assignee.name}</span>
+                    <span className="dash-assignee-name">{review.assignee.name}</span>
                   </div>
                 </td>
                 <td>
                   <span
                     className="dash-badge"
                     style={{
-                      background: `color-mix(in srgb, ${getStatusColor(review.status)} 15%, transparent)`,
+                      background: `color-mix(in srgb, ${getStatusColor(review.status)} 12%, transparent)`,
                       color: getStatusColor(review.status),
-                      borderColor: getStatusColor(review.status),
+                      borderColor: `color-mix(in srgb, ${getStatusColor(review.status)} 35%, transparent)`,
                     }}
                   >
+                    {statusIcons[review.status]}
                     {review.status === 'in-review'
                       ? 'In Review'
                       : review.status.charAt(0).toUpperCase() +
@@ -168,6 +197,11 @@ export default function ApprovalDash() {
                     className="dash-priority"
                     style={{ color: getPriorityColor(review.priority) }}
                   >
+                    {review.priority === 'high' && (
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: 3, verticalAlign: 'middle' }}>
+                        <path d="M12 2l2.09 6.26L20 9.27l-4 3.87.94 5.86L12 16.77l-4.94 2.23.94-5.86-4-3.87 5.91-.01z" />
+                      </svg>
+                    )}
                     {review.priority.charAt(0).toUpperCase() +
                       review.priority.slice(1)}
                   </span>
@@ -186,20 +220,51 @@ export default function ApprovalDash() {
                   <div className="dash-actions">
                     {review.status !== 'approved' && (
                       <button
-                        className="dash-action-btn approve"
-                        onClick={() => updateStatus(review.id, 'approved')}
+                        className={`dash-action-btn approve ${
+                          confirmingAction?.id === review.id &&
+                          confirmingAction?.action === 'approved'
+                            ? 'confirming'
+                            : ''
+                        }`}
+                        onClick={() => handleAction(review.id, 'approved')}
                         title="Approve"
                       >
-                        Approve
+                        {confirmingAction?.id === review.id &&
+                        confirmingAction?.action === 'approved' ? (
+                          <>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Confirm
+                          </>
+                        ) : (
+                          'Approve'
+                        )}
                       </button>
                     )}
                     {review.status !== 'rejected' && (
                       <button
-                        className="dash-action-btn reject"
-                        onClick={() => updateStatus(review.id, 'rejected')}
+                        className={`dash-action-btn reject ${
+                          confirmingAction?.id === review.id &&
+                          confirmingAction?.action === 'rejected'
+                            ? 'confirming'
+                            : ''
+                        }`}
+                        onClick={() => handleAction(review.id, 'rejected')}
                         title="Reject"
                       >
-                        Reject
+                        {confirmingAction?.id === review.id &&
+                        confirmingAction?.action === 'rejected' ? (
+                          <>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <line x1="18" y1="6" x2="6" y2="18" />
+                              <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                            Confirm
+                          </>
+                        ) : (
+                          'Reject'
+                        )}
                       </button>
                     )}
                   </div>
@@ -211,7 +276,13 @@ export default function ApprovalDash() {
       </div>
 
       {filtered.length === 0 && (
-        <p className="dash-empty">No reviews match the current filter.</p>
+        <div className="dash-empty">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }}>
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <p>No reviews match the current filter.</p>
+        </div>
       )}
     </div>
   );

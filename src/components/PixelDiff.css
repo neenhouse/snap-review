@@ -1,76 +1,110 @@
+/* ===================================================================
+   Pixel Diff — SnapReview
+   =================================================================== */
+
 .pixel-diff {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   flex: 1;
 }
 
-/* Controls */
+/* ── Controls bar ── */
 .diff-controls {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
 .diff-modes {
   display: flex;
-  gap: 4px;
-  background: var(--bg-tertiary);
+  gap: 2px;
+  background: var(--bg-primary);
   border-radius: var(--radius-sm);
   padding: 3px;
+  border: 1px solid var(--border);
 }
 
 .diff-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: none;
   border: none;
-  color: var(--text-secondary);
-  padding: 6px 14px;
-  border-radius: 4px;
-  font-size: 13px;
+  color: var(--text-muted);
+  padding: 5px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
   font-weight: 500;
-  transition: background 0.15s, color 0.15s;
+  transition: background var(--duration-fast), color var(--duration-fast);
+  white-space: nowrap;
 }
 .diff-mode-btn:hover {
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 .diff-mode-btn.active {
   background: var(--magenta);
   color: #fff;
+  box-shadow: 0 1px 6px var(--magenta-glow);
 }
 
 .diff-sensitivity {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text-secondary);
 }
 .diff-sensitivity label {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
 }
+
+.sensitivity-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.sensitivity-value {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--magenta);
+  min-width: 32px;
+}
+
 .diff-sensitivity input[type='range'] {
-  width: 100px;
-  accent-color: var(--magenta);
+  width: 90px;
 }
 
 .diff-stats {
   display: flex;
-  gap: 16px;
-  font-size: 13px;
-  color: var(--text-secondary);
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--mono);
 }
 .diff-stats .stat strong {
   color: var(--magenta);
+  font-weight: 700;
+}
+.stat-sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-dim);
 }
 
-/* Viewport */
+/* ── Viewport ── */
 .diff-viewport {
   flex: 1;
   min-height: 300px;
-  background: var(--bg-secondary);
+  background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   overflow: auto;
@@ -80,7 +114,7 @@
 .diff-side-by-side {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
   height: 100%;
 }
 
@@ -92,11 +126,14 @@
 }
 
 .diff-panel-label {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+}
+.diff-panel-label--after {
+  color: var(--magenta);
 }
 
 .diff-panel canvas {
@@ -104,7 +141,7 @@
   border: 1px solid var(--border);
 }
 
-/* Overlay mode */
+/* ── Overlay mode ── */
 .diff-overlay-container {
   display: flex;
   flex-direction: column;
@@ -127,6 +164,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  transition: opacity 0.08s linear;
 }
 
 .slider-control {
@@ -134,22 +172,38 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  padding: 8px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 .slider-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-dim);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   white-space: nowrap;
+}
+.slider-track {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .overlay-slider {
   flex: 1;
-  accent-color: var(--magenta);
+}
+.slider-value {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--magenta);
+  min-width: 32px;
+  text-align: right;
 }
 
-/* Diff only */
+/* ── Diff only ── */
 .diff-only-container {
   display: flex;
   flex-direction: column;
@@ -160,7 +214,7 @@
   border: 1px solid var(--border);
 }
 
-/* Annotation overlay */
+/* ── Annotation overlay ── */
 .annotation-overlay {
   position: absolute;
   top: 0;
@@ -169,7 +223,24 @@
 }
 
 .diff-hint {
-  font-size: 13px;
-  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-dim);
   text-align: center;
+  padding: 4px 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .diff-side-by-side {
+    grid-template-columns: 1fr;
+  }
+  .diff-controls {
+    gap: 12px;
+  }
+  .diff-stats {
+    margin-left: 0;
+  }
 }

@@ -29,7 +29,13 @@ export default function AppPage() {
       <nav className="app-nav">
         <div className="app-nav-left">
           <button className="app-nav-brand" onClick={() => navigate('/')}>
-            <span className="app-logo">SR</span>
+            <span className="app-logo">
+              <svg width="14" height="14" viewBox="0 0 32 32" fill="none">
+                <circle cx="14" cy="14" r="8" stroke="#ec4899" strokeWidth="2.5" fill="none"/>
+                <circle cx="14" cy="14" r="2" fill="#ec4899"/>
+                <line x1="20" y1="20" x2="27" y2="27" stroke="#ec4899" strokeWidth="2.5" strokeLinecap="round"/>
+              </svg>
+            </span>
             <span className="app-brand-text">SnapReview</span>
           </button>
           <div className="app-tabs">
@@ -37,16 +43,43 @@ export default function AppPage() {
               className={`app-tab ${tab === 'compare' ? 'active' : ''}`}
               onClick={() => setTab('compare')}
             >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+              </svg>
               Compare
             </button>
             <button
               className={`app-tab ${tab === 'dashboard' ? 'active' : ''}`}
               onClick={() => setTab('dashboard')}
             >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+              </svg>
               Dashboard
             </button>
           </div>
         </div>
+        {bothUploaded && tab === 'compare' && (
+          <button
+            className="app-nav-action"
+            onClick={() => {
+              setBeforeImage(null);
+              setAfterImage(null);
+              setAnnotations([]);
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            New Upload
+          </button>
+        )}
       </nav>
 
       {/* Content */}
@@ -64,18 +97,6 @@ export default function AppPage() {
                 />
               ) : (
                 <div className="compare-workspace">
-                  <div className="compare-toolbar">
-                    <button
-                      className="btn-sm btn-secondary-sm"
-                      onClick={() => {
-                        setBeforeImage(null);
-                        setAfterImage(null);
-                        setAnnotations([]);
-                      }}
-                    >
-                      Upload New
-                    </button>
-                  </div>
                   <PixelDiff
                     beforeSrc={beforeImage}
                     afterSrc={afterImage}
@@ -89,8 +110,8 @@ export default function AppPage() {
             </div>
 
             {/* Sidebar */}
-            <div className="compare-sidebar">
-              {bothUploaded && (
+            <div className={`compare-sidebar ${!bothUploaded ? 'sidebar-empty' : ''}`}>
+              {bothUploaded ? (
                 <>
                   <AnnotationTools
                     annotations={annotations}
@@ -105,6 +126,13 @@ export default function AppPage() {
                   />
                   <ReviewAssignment />
                 </>
+              ) : (
+                <div className="sidebar-placeholder">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" opacity="0.2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  <p>Upload screenshots to start annotating</p>
+                </div>
               )}
             </div>
           </div>

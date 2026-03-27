@@ -24,8 +24,6 @@ export default function AnnotationTools({ annotations, onRemove, onUpdate }: Pro
   };
 
   const scrollToPin = (ann: Annotation) => {
-    // In a real app we'd scroll the canvas viewport.
-    // For now, we'll highlight the pin via a brief visual flash.
     const el = document.getElementById(`pin-${ann.id}`);
     if (el) {
       el.classList.add('pin-flash');
@@ -36,7 +34,12 @@ export default function AnnotationTools({ annotations, onRemove, onUpdate }: Pro
   return (
     <div className="annotation-tools" data-testid="annotation-tools">
       <div className="annotation-header">
-        <h3>Annotations</h3>
+        <div className="annotation-header-left">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          <h3>Annotations</h3>
+        </div>
         <span className="annotation-count">{annotations.length}</span>
       </div>
 
@@ -66,7 +69,10 @@ export default function AnnotationTools({ annotations, onRemove, onUpdate }: Pro
                   }}
                   aria-label={`Remove annotation ${i + 1}`}
                 >
-                  x
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
                 </button>
               </div>
 
