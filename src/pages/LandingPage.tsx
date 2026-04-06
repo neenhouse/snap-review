@@ -55,6 +55,7 @@ export default function LandingPage() {
 
   return (
     <div className="landing">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       {/* Nav */}
       <nav className="landing-nav">
         <div className="landing-nav-brand">
@@ -76,7 +77,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section className="landing-hero">
+      <section id="main-content" className="landing-hero">
         <div className="landing-hero-badge">Visual QA Platform</div>
         <h1 className="landing-hero-title">
           Catch every{' '}

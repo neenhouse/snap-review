@@ -96,12 +96,12 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg-primary);
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* ── Links ── */
@@ -200,6 +200,18 @@ input[type='range']::-moz-range-thumb {
   color: var(--magenta-bright);
 }
 
+/* ── Scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--magenta);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
 /* ── Utility classes ── */
 .sr-only {
   position: absolute;
@@ -211,4 +223,34 @@ input[type='range']::-moz-range-thumb {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: 8px 16px;
+  background: var(--magenta);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 9999;
+  border-radius: 0 0 var(--radius-sm) 0;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

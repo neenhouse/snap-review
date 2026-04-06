@@ -5,7 +5,7 @@
 .app-page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg-primary);
 }
 
@@ -129,7 +129,7 @@
 .compare-layout {
   display: grid;
   grid-template-columns: 1fr 340px;
-  height: calc(100vh - 52px);
+  height: calc(100dvh - 52px);
 }
 
 .compare-main {

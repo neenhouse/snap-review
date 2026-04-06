@@ -25,6 +25,7 @@ export default function AppPage() {
 
   return (
     <div className="app-page">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       {/* Top nav */}
       <nav className="app-nav">
         <div className="app-nav-left">
@@ -83,7 +84,7 @@ export default function AppPage() {
       </nav>
 
       {/* Content */}
-      <div className="app-content">
+      <div id="main-content" className="app-content">
         {tab === 'compare' ? (
           <div className="compare-layout">
             {/* Upload + Diff area */}
